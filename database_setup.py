@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
 import sqlite3
 
 def setup_database():
@@ -24,13 +20,14 @@ def setup_database():
             id INTEGER PRIMARY KEY,
             url TEXT,
             datetime TEXT,
+            processed INTEGER DEFAULT 0,
             output TEXT
         )
     ''')
 
     # Create table for matched URLs
     cursor.execute('''
-        CREATE TABLE matched_urls (
+        CREATE TABLE  IF NOT EXISTS matched_urls (
             id INTEGER PRIMARY KEY,
             url_result_id INTEGER,
             matched_url TEXT,
@@ -43,3 +40,16 @@ def setup_database():
     return conn
 
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS matches (
+            id INTEGER PRIMARY KEY,
+            url_url_results TEXT,
+            match_url TEXT,
+            competition TEXT,
+            home_team TEXT,
+            away_team TEXT,
+            result TEXT
+        )
+    ''')
+
+    conn.commit()
