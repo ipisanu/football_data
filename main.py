@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import sqlite3
 from link_generator import generate_links, save_links_to_db
 from database_setup import setup_database
