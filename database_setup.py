@@ -28,6 +28,18 @@ def setup_database():
         )
     ''')
 
+    # Create table for matched URLs
+    cursor.execute('''
+        CREATE TABLE matched_urls (
+            id INTEGER PRIMARY KEY,
+            url_result_id INTEGER,
+            matched_url TEXT,
+            processed INTEGER DEFAULT 0,
+            FOREIGN KEY (url_result_id) REFERENCES url_results(id) ON DELETE CASCADE
+        )
+    ''')
+
     conn.commit()
     return conn
+
 
